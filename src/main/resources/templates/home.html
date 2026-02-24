@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Home | EcoSystems</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+
+<div class="home-container">
+
+    <div class="home-logo">
+        <div class="logo-circle">🌿</div>
+        <h1>EcoSystems</h1>
+        <p>Gestión Ambiental</p>
+    </div>
+
+    <div class="home-card">
+        <h2>Bienvenido</h2>
+
+        <p>Login realizado correctamente.</p>
+
+        <p class="user-email">
+            Usuario: <span th:text="${email}"></span>
+        </p>
+
+        <div class="home-actions">
+            <a href="/checklist" class="btn-primary">
+                Iniciar Checklist
+            </a>
+
+            <a href="/logout" class="btn-logout">
+                Cerrar sesión
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        Sistema de Gestión Ambiental © 2026
+    </footer>
+
+</div>
+
+</body>
+</html>

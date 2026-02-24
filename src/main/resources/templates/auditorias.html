@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Auditorías</title>
+</head>
+<body>
+
+<h2>Lista de Auditorías</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Código</th>
+            <th>Fecha</th>
+            <th>Usuario</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="auditoria : ${auditorias}">
+            <td th:text="${auditoria.id}"></td>
+            <td th:text="${auditoria.codigo}"></td>
+            <td th:text="${auditoria.fecha}"></td>
+            <td th:text="${auditoria.usuarioEmail}"></td>
+            <td>
+                <a th:href="@{'/auditorias/' + ${auditoria.id}}">
+                    Ver
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+<a href="/checklist">Nueva Auditoría</a>
+
+</body>
+</html>

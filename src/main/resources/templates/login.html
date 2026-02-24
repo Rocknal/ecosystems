@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Inicio de Sesión</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+<div class="login-container">
+
+  <div class="login-header">
+    <div class="logo-circle">🌿</div>
+    <h1>EcoSystems</h1>
+    <p class="subtitle">Gestión Ambiental</p>
+  </div>
+
+  <div class="login-card">
+    <h2>Iniciar Sesión</h2>
+    <p class="description">
+      Ingrese sus credenciales para acceder al sistema
+    </p>
+
+    <form th:action="@{/login}" method="post">
+      <label>Correo Electrónico</label>
+      <input 
+  		type="email"
+  		name="username"
+  		placeholder="usuario@ejemplo.com"
+  		required
+		>
+
+
+
+      <label>Contraseña</label>
+      <input 
+  		type="password"
+  		name="password"
+  		placeholder="••••••••"
+  		required
+		>
+
+
+
+      <div class="login-options">
+        <label class="remember">
+          <input type="checkbox">
+          Recordarme
+        </label>
+
+        <a href="#" class="forgot">¿Olvidó su contraseña?</a>
+      </div>
+
+      <button type="submit">Ingresar al Sistema</button>
+    </form>
+
+    <p class="register">
+      ¿No tiene una cuenta?
+      <a href="#">Solicitar acceso</a>
+    </p>
+  </div>
+
+</div>
+
+<footer>
+  Sistema de Gestión Ambiental © 2026
+</footer>
+
+
+</body>
+</html>

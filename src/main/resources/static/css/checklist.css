@@ -1,0 +1,283 @@
+/* ==========================
+   FUENTE Y BASE
+========================== */
+@import
+	url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap')
+	;
+
+* {
+	box-sizing: border-box;
+	font-family: 'Inter', sans-serif;
+}
+
+body {
+	margin: 0;
+	background: #eefaf4;
+	color: #0f3d2e;
+}
+
+/* ==========================
+   CONTENEDOR PRINCIPAL
+========================== */
+.checklist-container {
+	max-width: 1100px;
+	margin: 40px auto;
+	padding: 20px;
+}
+
+/* ==========================
+   HEADER
+========================== */
+.checklist-header {
+	background: linear-gradient(135deg, #009f6b, #00b37e);
+	color: white;
+	padding: 30px;
+	border-radius: 16px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, .1);
+}
+
+.logo-circle {
+	width: 48px;
+	height: 48px;
+	background: white;
+	color: #009f6b;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 22px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.checklist-header h1 {
+	margin: 0;
+	font-size: 22px;
+}
+
+.checklist-header p {
+	margin: 5px 0 20px;
+	opacity: .9;
+}
+
+.header-fields {
+	display: flex;
+	gap: 20px;
+}
+
+.header-fields label {
+	display: block;
+	font-size: 13px;
+	margin-bottom: 4px;
+}
+
+.header-fields input {
+	padding: 8px 12px;
+	border-radius: 8px;
+	border: none;
+	outline: none;
+}
+
+/* ==========================
+   CARD
+========================== */
+.checklist-card {
+	background: white;
+	margin-top: 30px;
+	padding: 30px;
+	border-radius: 18px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+}
+
+.checklist-card h2 {
+	margin-top: 30px;
+	font-size: 18px;
+	color: #009f6b;
+	border-bottom: 2px solid #e6f6ef;
+	padding-bottom: 8px;
+}
+
+/* ==========================
+   FORMULARIOS
+========================== */
+label {
+	display: block;
+	font-size: 14px;
+	margin-top: 16px;
+	margin-bottom: 6px;
+}
+
+input, select, textarea {
+	width: 100%;
+	padding: 12px 14px;
+	border-radius: 10px;
+	border: 1px solid #cfeee1;
+	background: #f6fffb;
+	outline: none;
+	font-size: 14px;
+}
+
+input:focus, select:focus, textarea:focus {
+	border-color: #00b37e;
+	background: white;
+}
+
+/* ==========================
+   GRILLAS
+========================== */
+.grid-2 {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 16px;
+}
+
+.grid-3 {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 16px;
+}
+
+/* ==========================
+   LEYENDA
+========================== */
+.legend {
+	margin-top: 25px;
+	background: #f0fbf6;
+	padding: 15px;
+	border-radius: 12px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	font-size: 13px;
+}
+
+/* ==========================
+   CHECKLIST ITEMS
+========================== */
+.check-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 14px 16px;
+	background: #f7fdfb;
+	border-radius: 12px;
+	margin-top: 12px;
+	border: 1px solid #e3f5ee;
+}
+
+.check-row span {
+	font-size: 14px;
+}
+
+.options {
+	display: flex;
+	gap: 12px;
+}
+
+.options label {
+	font-size: 13px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+/* ==========================
+   BOTÓN
+========================== */
+.btn-save {
+	margin-top: 40px;
+	background: #009f6b;
+	color: white;
+	border: none;
+	padding: 14px 24px;
+	border-radius: 12px;
+	font-size: 15px;
+	cursor: pointer;
+	box-shadow: 0 6px 20px rgba(0, 159, 107, .35);
+}
+
+.btn-save:hover {
+	background: #007f56;
+}
+
+/* ==========================
+   VOLVER
+========================== */
+.back-link {
+	display: inline-block;
+	margin-top: 20px;
+	text-decoration: none;
+	color: #009f6b;
+	font-weight: 500;
+}
+
+/* ===== SECCIONES ===== */
+.section-box {
+	margin-bottom: 32px;
+	padding-bottom: 24px;
+	border-bottom: 1px solid #e5e7eb;
+}
+
+/* Títulos de sección */
+.section-box h2 {
+	margin-bottom: 20px;
+	font-size: 18px;
+	color: #1f2937;
+	border-left: 4px solid #2f855a;
+	padding-left: 12px;
+}
+
+/* Grillas */
+.grid-2 {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+}
+
+.grid-3 {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 16px;
+}
+
+/* Inputs */
+.checklist-card input, .checklist-card select, .checklist-card textarea
+	{
+	width: 100%;
+	padding: 10px 12px;
+	border-radius: 8px;
+	border: 1px solid #d1d5db;
+	font-size: 14px;
+}
+
+.checklist-card label {
+	font-size: 13px;
+	font-weight: 600;
+	margin-top: 14px;
+	display: block;
+	color: #374151;
+}
+
+/* Filas del checklist */
+.check-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 0;
+	border-bottom: 1px dashed #e5e7eb;
+	font-size: 14px;
+}
+
+.check-row span {
+	flex: 1;
+}
+
+.options {
+	display: flex;
+	gap: 14px;
+}
+
+.options label {
+	font-weight: 500;
+	cursor: pointer;
+}

@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #e9f7f1;
+}
+
+.home-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.home-logo .logo-circle {
+    width: 70px;
+    height: 70px;
+    background: #0a8f5a;
+    color: white;
+    border-radius: 50%;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+}
+
+.home-card {
+    background: white;
+    padding: 35px;
+    border-radius: 16px;
+    width: 360px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    text-align: center;
+}
+
+.home-card h2 {
+    margin-bottom: 10px;
+}
+
+.home-card p {
+    margin: 8px 0;
+    color: #555;
+}
+
+.user-email {
+    color: #0a8f5a;
+    font-weight: 600;
+}
+
+.home-actions {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-primary {
+    background: #0a8f5a;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: #087548;
+}
+
+.btn-logout {
+    background: #c62828;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-logout:hover {
+    background: #a21f1f;
+}
+
+footer {
+    margin-top: 25px;
+    font-size: 13px;
+    color: #666;
+}

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Checklist Auditoría | EcoSystems</title>
+<link rel="stylesheet" th:href="@{/css/checklist.css}">
+</head>
+<body>
+
+	<div class="checklist-container">
+
+		<form class="checklist-card" th:action="@{/guardar-auditoria}"
+			th:object="${auditoria}" method="post">
+
+			<input type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" /> <input type="hidden"
+				name="usuarioEmail" th:value="${#authentication.name}">
+
+			<!-- HEADER -->
+			<div class="checklist-header">
+				<div class="logo-circle">🌿</div>
+				<h1>CHECK LIST AUDITORÍA</h1>
+				<p>Auditoría Interna SIGASS</p>
+
+				<div class="header-fields">
+					<div>
+						<label>Código</label> <input type="text" th:field="*{codigo}"
+							placeholder="Ingrese código">
+						<div class="error" th:if="${#fields.hasErrors('codigo')}"
+							th:errors="*{codigo}"></div>
+					</div>
+
+					<div>
+						<label>Revisión</label> <input type="text" name="revision"
+							value="00">
+					</div>
+				</div>
+			</div>
+
+			<!-- DATOS DEL PROPONENTE -->
+			<div class="section-box">
+
+				<h2>Datos del Proponente</h2>
+
+				<label>Silo de Acopio</label> <input type="text"
+					th:field="*{siloAcopio}">
+				<div class="error" th:if="${#fields.hasErrors('siloAcopio')}"
+					th:errors="*{siloAcopio}"></div>
+
+				<div class="grid-3">
+					<div>
+						<label>Departamento</label> <select id="departamento"
+							th:field="*{departamento}">
+							<option value="">Seleccione departamento</option>
+						</select>
+						<div class="error" th:if="${#fields.hasErrors('departamento')}"
+							th:errors="*{departamento}"></div>
+					</div>
+
+					<div>
+						<label>Distrito</label> <select id="distrito"
+							th:field="*{distrito}" disabled>
+							<option value="">Seleccione distrito</option>
+						</select>
+						<div class="error" th:if="${#fields.hasErrors('distrito')}"
+							th:errors="*{distrito}"></div>
+					</div>
+
+					<div>
+						<label>Localidad</label> <input type="text"
+							th:field="*{localidad}">
+					</div>
+				</div>
+
+				<label>Lugar</label> <input type="text" th:field="*{lugar}">
+
+				<div class="grid-2">
+					<div>
+						<label>Coordenadas X</label> <input type="text"
+							th:field="*{coordenadaX}">
+					</div>
+					<div>
+						<label>Coordenadas Y</label> <input type="text"
+							th:field="*{coordenadaY}">
+					</div>
+				</div>
+
+			</div>
+
+
+			<!-- LEYENDA -->
+			<div class="legend">
+				<strong>Leyenda:</strong> <span><b>C</b>: Cumple</span> <span><b>NC</b>:
+					No Cumple</span> <span><b>N/A</b>: No Aplica</span> <span><b>O/M</b>:
+					Observación / Mejora</span>
+			</div>
+
+			<div th:each="item, iterStat : ${auditoria.items}">
+
+				<!-- Mostrar título cuando cambia la sección -->
+				<div
+					th:if="${iterStat.index == 0 or 
+                 item.checklistItem.seccion != 
+                 auditoria.items[iterStat.index - 1].checklistItem.seccion}">
+
+					<h2
+						th:text="${item.checklistItem.seccion} + '. ' + 
+                     ${nombresSecciones[item.checklistItem.seccion]}">
+					</h2>
+				</div>
+
+				<div class="check-row">
+
+					<span th:text="${item.checklistItem.descripcion}"></span> <input
+						type="hidden"
+						th:field="*{items[__${iterStat.index}__].checklistItem.id}" />
+
+					<div class="options">
+						<label> <input type="radio"
+							th:field="*{items[__${iterStat.index}__].resultado}" value="C">
+							C
+						</label> <label> <input type="radio"
+							th:field="*{items[__${iterStat.index}__].resultado}" value="NC">
+							NC
+						</label> <label> <input type="radio"
+							th:field="*{items[__${iterStat.index}__].resultado}" value="NA">
+							N/A
+						</label> <label> <input type="radio"
+							th:field="*{items[__${iterStat.index}__].resultado}" value="OM">
+							O/M
+						</label>
+					</div>
+				</div>
+
+			</div>
+
+			<label>Observaciones Generales</label>
+			<textarea rows="4" th:field="*{observaciones}"></textarea>
+
+			<button type="submit" class="btn-save">Guardar Auditoría</button>
+
+		</form>
+
+		<a href="/home" class="back-link">← Volver al Home</a>
+
+	</div>
+
+	<script>
+	const dataParaguay = {
+			  "Alto Paraguay": [
+			    "Bahía Negra",
+			    "Carmelo Peralta",
+			    "Fuerte Olimpo"
+			  ],
+
+			  "Alto Paraná": [
+			    "Ciudad del Este",
+			    "Doctor Juan León Mallorquín",
+			    "Hernandarias",
+			    "Iruña",
+			    "Itakyry",
+			    "Juan E. O'Leary",
+			    "Los Cedrales",
+			    "Mbaracayú",
+			    "Minga Guazú",
+			    "Presidente Franco",
+			    "San Alberto",
+			    "San Cristóbal",
+			    "Santa Fe del Paraná",
+			    "Santa Rita",
+			    "Santa Rosa del Monday",
+			    "Tavapy",
+			    "Yguazú"
+			  ],
+
+			  "Amambay": [
+			    "Pedro Juan Caballero",
+			    "Bella Vista Norte",
+			    "Capitán Bado",
+			    "Karapaí",
+			    "Zanja Pytã"
+			  ],
+
+			  "Boquerón": [
+			    "Filadelfia",
+			    "Loma Plata",
+			    "Mariscal Estigarribia"
+			  ],
+
+			  "Caaguazú": [
+			    "Coronel Oviedo",
+			    "Caaguazú",
+			    "Carayaó",
+			    "Doctor Cecilio Báez",
+			    "José Domingo Ocampos",
+			    "La Pastora",
+			    "Mcal. Francisco S. López",
+			    "Nueva Londres",
+			    "Repatriación",
+			    "R.I. 3 Corrales",
+			    "San Joaquín",
+			    "San José de los Arroyos",
+			    "Simón Bolívar",
+			    "Tembiaporã",
+			    "Tres Corrales",
+			    "Vaquería",
+			    "Yhú"
+			  ],
+
+			  "Caazapá": [
+			    "Caazapá",
+			    "Abaí",
+			    "Buena Vista",
+			    "Doctor Moisés Bertoni",
+			    "Fulgencio Yegros",
+			    "General Higinio Morínigo",
+			    "Maciel",
+			    "San Juan Nepomuceno",
+			    "Tavaí",
+			    "Yuty"
+			  ],
+
+			  "Canindeyú": [
+			    "Salto del Guairá",
+			    "Corpus Christi",
+			    "Curuguaty",
+			    "General Francisco Caballero Álvarez",
+			    "Itanará",
+			    "Katueté",
+			    "La Paloma",
+			    "Nueva Esperanza",
+			    "Yasy Cañy",
+			    "Ybyrarobaná",
+			    "Ypejhú"
+			  ],
+
+			  "Central": [
+			    "Areguá",
+			    "Capiatá",
+			    "Fernando de la Mora",
+			    "Guarambaré",
+			    "Itá",
+			    "Itauguá",
+			    "J. Augusto Saldívar",
+			    "Lambaré",
+			    "Limpio",
+			    "Luque",
+			    "Mariano Roque Alonso",
+			    "Ñemby",
+			    "Nueva Italia",
+			    "San Antonio",
+			    "San Lorenzo",
+			    "Villa Elisa",
+			    "Villeta",
+			    "Ypacaraí",
+			    "Ypané"
+			  ],
+
+			  "Concepción": [
+			    "Concepción",
+			    "Belén",
+			    "Horqueta",
+			    "Loreto",
+			    "San Carlos del Apa",
+			    "San Lázaro",
+			    "Yby Yaú"
+			  ],
+
+			  "Cordillera": [
+			    "Caacupé",
+			    "Altos",
+			    "Arroyos y Esteros",
+			    "Atyrá",
+			    "Caraguatay",
+			    "Emboscada",
+			    "Eusebio Ayala",
+			    "Isla Pucú",
+			    "Itacurubí de la Cordillera",
+			    "Juan de Mena",
+			    "Loma Grande",
+			    "Mbocayaty del Yhaguy",
+			    "Nueva Colombia",
+			    "Piribebuy",
+			    "Primero de Marzo",
+			    "San Bernardino",
+			    "Santa Elena",
+			    "Tobatí",
+			    "Valenzuela"
+			  ],
+
+			  "Guairá": [
+			    "Villarrica",
+			    "Borja",
+			    "Capitán Mauricio José Troche",
+			    "Coronel Martínez",
+			    "Dr. Bottrell",
+			    "Félix Pérez Cardozo",
+			    "Independencia",
+			    "Itapé",
+			    "Iturbe",
+			    "José Fassardi",
+			    "Mbocayaty",
+			    "Natalicio Talavera",
+			    "Ñumí",
+			    "Paso Yobái",
+			    "San Salvador",
+			    "Yataity"
+			  ],
+
+			  "Itapúa": [
+			    "Encarnación",
+			    "Alto Verá",
+			    "Bella Vista",
+			    "Cambyretá",
+			    "Capitán Meza",
+			    "Capitán Miranda",
+			    "Carlos Antonio López",
+			    "Carmen del Paraná",
+			    "Coronel Bogado",
+			    "Edelira",
+			    "Fram",
+			    "General Artigas",
+			    "General Delgado",
+			    "Hohenau",
+			    "Jesús",
+			    "La Paz",
+			    "Leandro Oviedo",
+			    "Mayor Otaño",
+			    "Natalio",
+			    "Nueva Alborada",
+			    "Obligado",
+			    "Pirapó",
+			    "San Cosme y Damián",
+			    "San Juan del Paraná",
+			    "San Pedro del Paraná",
+			    "Trinidad",
+			    "Yatytay"
+			  ],
+
+			  "Misiones": [
+			    "San Juan Bautista",
+			    "Ayolas",
+			    "San Ignacio",
+			    "San Miguel",
+			    "San Patricio",
+			    "Santa María",
+			    "Santa Rosa",
+			    "Santiago",
+			    "Villa Florida",
+			    "Yabebyry"
+			  ],
+
+			  "Ñeembucú": [
+			    "Pilar",
+			    "Alberdi",
+			    "Cerrito",
+			    "Desmochados",
+			    "Guazú Cuá",
+			    "Humaitá",
+			    "Isla Umbú",
+			    "Laureles",
+			    "Mayor Martínez",
+			    "Paso de Patria",
+			    "San Juan Bautista del Ñeembucú",
+			    "Tacuaras",
+			    "Villa Franca",
+			    "Villa Oliva"
+			  ],
+
+			  "Paraguarí": [
+			    "Paraguarí",
+			    "Acahay",
+			    "Caapucú",
+			    "Carapeguá",
+			    "Escobar",
+			    "General Bernardino Caballero",
+			    "La Colmena",
+			    "Mbuyapey",
+			    "Pirayú",
+			    "Quiindy",
+			    "Quyquyhó",
+			    "San Roque González",
+			    "Sapucai",
+			    "Tebicuarymí",
+			    "Yaguarón",
+			    "Ybycuí",
+			    "Ybytymí"
+			  ],
+
+			  "Presidente Hayes": [
+			    "Villa Hayes",
+			    "Benjamín Aceval",
+			    "Nanawa",
+			    "Puerto Pinasco",
+			    "Teniente Esteban Martínez"
+			  ],
+
+			  "San Pedro": [
+			    "San Pedro del Ycuamandyyú",
+			    "Antequera",
+			    "Capiibary",
+			    "Choré",
+			    "General Elizardo Aquino",
+			    "General Resquín",
+			    "Guayaibí",
+			    "Itacurubí del Rosario",
+			    "Liberación",
+			    "Lima",
+			    "Nueva Germania",
+			    "San Estanislao",
+			    "San Pablo",
+			    "Santa Rosa del Aguaray",
+			    "Tacuatí",
+			    "Unión",
+			    "Villa del Rosario",
+			    "Yataity del Norte"
+			  ]
+			};
+
+const deptoSelect = document.getElementById("departamento");
+const distritoSelect = document.getElementById("distrito");
+
+// Cargar departamentos
+Object.keys(dataParaguay).forEach(depto => {
+    const option = document.createElement("option");
+    option.value = depto;
+    option.textContent = depto;
+    deptoSelect.appendChild(option);
+});
+
+// Cambio de departamento
+deptoSelect.addEventListener("change", () => {
+    const selectedDepto = deptoSelect.value;
+
+    distritoSelect.innerHTML = '<option value="">Seleccione distrito</option>';
+    distritoSelect.disabled = true;
+
+    if (selectedDepto && dataParaguay[selectedDepto]) {
+        dataParaguay[selectedDepto].forEach(distrito => {
+            const option = document.createElement("option");
+            option.value = distrito;
+            option.textContent = distrito;
+            distritoSelect.appendChild(option);
+        });
+        distritoSelect.disabled = false;
+    }
+});
+</script>
+
+
+</body>
+</html>
